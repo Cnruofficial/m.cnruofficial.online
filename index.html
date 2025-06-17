@@ -1,0 +1,9 @@
+<script>
+  const canonicalHost = "www.cnruofficial.online";
+  const currentHost = window.location.hostname;
+
+  if (currentHost !== canonicalHost) {
+    const newUrl = "https://" + canonicalHost + window.location.pathname + window.location.search;
+    window.location.replace(newUrl);
+  }
+</script>
