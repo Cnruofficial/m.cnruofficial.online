@@ -1,0 +1,18 @@
+RewriteEngine On
+
+# Перенаправление на HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Перенаправление на www
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Канонический домен: всегда перенаправляем на https://www.cnruofficial.online
+RewriteCond %{HTTP_HOST} !^www\.cnruofficial\.online$ [NC]
+RewriteRule ^ https://www.cnruofficial.online%{REQUEST_URI} [L,R=301]
+
+# Можно также добавить заголовок rel=canonical (если .htaccess обрабатывает HTML напрямую)
+<IfModule mod_headers.c>
+    Header set Link "<https://www.cnruofficial.online%{REQUEST_URI}>; rel=\"canonical\"" env=REDIRECT_STATUS
+</IfModule>
